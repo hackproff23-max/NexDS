@@ -16,7 +16,8 @@
             <Button android:id="@id/btn_rom_all" android:visibility="gone" android:layout_width="0.0dip" android:layout_height="0.0dip" android:text="@string/btn_rom_all" />
             <View android:id="@id/romlist_marker_recent" android:layout_width="0.0dip" android:layout_height="0.0dip" />
             <View android:id="@id/romlist_marker_all" android:layout_width="0.0dip" android:layout_height="0.0dip" />
-            <Button android:textSize="13.0sp" android:textStyle="bold" android:textColor="#fffffffe" android:id="@id/btn_path_add" android:background="@drawable/btn_layout_bg" android:layout_width="fill_parent" android:layout_height="40.0dip" android:text="PROCURAR JOGOS" android:layout_centerVertical="true" android:contentDescription="Procurar jogos" />
+            <TextView android:textSize="16.0sp" android:textStyle="bold" android:textColor="#fffffffe" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="JOGOS" android:layout_centerInParent="true" />
+            <ImageButton android:id="@id/btn_path_add" android:background="@drawable/btn_layout_bg" android:layout_alignParentRight="true" android:layout_alignParentEnd="true" android:layout_centerVertical="true" android:contentDescription="Add Game" style="@style/drastic_btn_add" />
         </RelativeLayout>
         <TextView android:textSize="11.0sp" android:textColor="#ff546e7a" android:visibility="gone" android:id="@id/rompath_view" android:paddingLeft="16.0dip" android:paddingTop="6.0dip" android:paddingRight="16.0dip" android:paddingBottom="2.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:singleLine="true" android:ellipsize="start" />
         <FrameLayout android:layout_width="fill_parent" android:layout_height="0.0dip" android:layout_weight="1.0">
