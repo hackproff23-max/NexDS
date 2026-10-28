@@ -7549,6 +7549,10 @@
 
     invoke-virtual {p0, v1}, Landroid/app/Activity;->setContentView(Landroid/view/View;)V
 
+    const/4 v2, 0x4
+
+    invoke-virtual {v1, v2}, Landroid/view/View;->setVisibility(I)V
+
     const v1, 0x7f0902b6
 
     invoke-virtual {p0, v1}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
