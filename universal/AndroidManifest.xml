@@ -34,6 +34,8 @@
                 <data android:pathPattern=".*\\..*\\..*\\..*\\.nds"/>
                 <data android:host="*"/>
             </intent-filter>
+        </activity>
+        <activity android:exported="true" android:label="@string/app_name" android:name="com.dsemu.drastic.SplashActivity" android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
