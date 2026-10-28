@@ -1,0 +1,47 @@
+name: Build NexDS APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Baixar apktool e uber-apk-signer
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p tools
+          gh release download --repo iBotPeaches/Apktool --pattern 'apktool_*.jar' --dir tools
+          gh release download --repo patrickfav/uber-apk-signer --pattern 'uber-apk-signer-*.jar' --dir tools
+          mv tools/apktool_*.jar tools/apktool.jar
+          mv tools/uber-apk-signer-*.jar tools/uber-apk-signer.jar
+          ls -la tools
+
+      - name: Compilar (apktool b)
+        run: java -jar tools/apktool.jar b -o NexDS-unsigned.apk universal
+
+      - name: Alinhar e assinar
+        run: java -jar tools/uber-apk-signer.jar --apks NexDS-unsigned.apk --allowResign --out out
+
+      - name: Renomear
+        run: |
+          ls -la out
+          mv out/*.apk out/NexDS.apk
+
+      - name: Enviar APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: NexDS-apk
+          path: out/NexDS.apk
