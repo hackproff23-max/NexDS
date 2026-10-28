@@ -185,7 +185,7 @@
     invoke-virtual {p3, v0}, Landroid/view/View;->setOnClickListener(Landroid/view/View$OnClickListener;)V
 
     :goto_1
-    sget p3, Lf0/h;->r:I
+    const/4 p3, 0x1
 
     iput p3, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->j:I
 
@@ -1646,7 +1646,7 @@
 .end method
 
 .method private final u(Lcom/dsemu/drastic/filesystem/b;)Ljava/util/List;
-    .locals 12
+    .locals 4
     .annotation system Ldalvik/annotation/Signature;
         value = {
             "(",
@@ -1657,6 +1657,63 @@
             ">;"
         }
     .end annotation
+
+    new-instance v0, Ljava/util/ArrayList;
+
+    invoke-direct {v0}, Ljava/util/ArrayList;-><init>()V
+
+    invoke-static {}, Lcom/dsemu/drastic/filesystem/d;->f()Ljava/util/List;
+
+    move-result-object v1
+
+    invoke-interface {v1}, Ljava/util/List;->iterator()Ljava/util/Iterator;
+
+    move-result-object v1
+
+    :goto_0
+    invoke-interface {v1}, Ljava/util/Iterator;->hasNext()Z
+
+    move-result v2
+
+    if-eqz v2, :cond_0
+
+    invoke-interface {v1}, Ljava/util/Iterator;->next()Ljava/lang/Object;
+
+    move-result-object v2
+
+    check-cast v2, Lcom/dsemu/drastic/filesystem/b;
+
+    const/4 v3, 0x0
+
+    invoke-direct {p0, v2, v0, v3}, Lcom/dsemu/drastic/ui/RomSelector$e;->scanGames(Lcom/dsemu/drastic/filesystem/b;Ljava/util/List;I)V
+
+    goto :goto_0
+
+    :cond_0
+    invoke-interface {v0}, Ljava/util/List;->size()I
+
+    move-result v1
+
+    const/4 v2, 0x1
+
+    if-le v1, v2, :cond_1
+
+    invoke-static {}, Lcom/dsemu/drastic/ui/RomSelector;->o()Lcom/dsemu/drastic/ui/RomSelector$f;
+
+    move-result-object v1
+
+    invoke-static {v0, v1}, Ljava/util/Collections;->sort(Ljava/util/List;Ljava/util/Comparator;)V
+
+    :cond_1
+    return-object v0
+.end method
+
+.method private final scanGames(Lcom/dsemu/drastic/filesystem/b;Ljava/util/List;I)V
+    .locals 9
+
+    const/16 v0, 0x8
+
+    if-gt p3, v0, :cond_end
 
     iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->m:Lcom/dsemu/drastic/ui/RomSelector;
 
@@ -1670,234 +1727,77 @@
 
     invoke-interface {p1, v0, v1}, Lcom/dsemu/drastic/filesystem/b;->v(Landroid/content/Context;Lcom/dsemu/drastic/filesystem/b$c;)[Lcom/dsemu/drastic/filesystem/b;
 
-    move-result-object v0
+    move-result-object v1
 
-    invoke-static {p1}, Lcom/dsemu/drastic/ui/RomSelector;->D(Lcom/dsemu/drastic/filesystem/b;)Z
+    if-eqz v1, :cond_end
 
-    move-result v1
+    const/4 v2, 0x0
 
-    new-instance v2, Ljava/util/ArrayList;
+    :goto_loop
+    array-length v3, v1
 
-    invoke-direct {v2}, Ljava/util/ArrayList;-><init>()V
+    if-ge v2, v3, :cond_end
 
-    invoke-interface {p1}, Lcom/dsemu/drastic/filesystem/b;->getParent()Lcom/dsemu/drastic/filesystem/b;
+    aget-object v3, v1, v2
 
-    move-result-object p1
+    invoke-interface {v3, v0}, Lcom/dsemu/drastic/filesystem/b;->i(Landroid/content/Context;)Z
 
-    const/4 v3, 0x0
+    move-result v4
 
-    const/4 v4, 0x0
+    if-eqz v4, :cond_file
 
-    if-nez p1, :cond_0
+    add-int/lit8 v4, p3, 0x1
 
-    if-nez v1, :cond_2
+    invoke-direct {p0, v3, p2, v4}, Lcom/dsemu/drastic/ui/RomSelector$e;->scanGames(Lcom/dsemu/drastic/filesystem/b;Ljava/util/List;I)V
 
-    :cond_0
-    new-instance v5, Lcom/dsemu/drastic/ui/RomSelector$h;
+    goto :goto_next
 
-    invoke-direct {v5}, Lcom/dsemu/drastic/ui/RomSelector$h;-><init>()V
+    :cond_file
+    iget-object v4, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->e:Landroid/content/Context;
 
-    const-string v6, ".."
+    invoke-interface {v3, v4}, Lcom/dsemu/drastic/filesystem/b;->p(Landroid/content/Context;)Ljava/lang/String;
 
-    iput-object v6, v5, Lcom/dsemu/drastic/ui/RomSelector$h;->c:Ljava/lang/String;
+    move-result-object v4
 
-    if-eqz p1, :cond_1
+    invoke-static {v4}, Lcom/dsemu/drastic/DraSticJNI;->isNdsFile(Ljava/lang/String;)Z
 
-    goto :goto_0
+    move-result v4
 
-    :cond_1
-    invoke-static {}, Lcom/dsemu/drastic/filesystem/d;->g()Lcom/dsemu/drastic/filesystem/b;
+    if-eqz v4, :goto_next
 
-    move-result-object p1
+    new-instance v4, Lcom/dsemu/drastic/ui/RomSelector$h;
 
-    :goto_0
-    iput-object p1, v5, Lcom/dsemu/drastic/ui/RomSelector$h;->b:Lcom/dsemu/drastic/filesystem/b;
+    invoke-direct {v4}, Lcom/dsemu/drastic/ui/RomSelector$h;-><init>()V
 
-    iput v4, v5, Lcom/dsemu/drastic/ui/RomSelector$h;->e:I
+    invoke-interface {v3, v0}, Lcom/dsemu/drastic/filesystem/b;->w(Landroid/content/Context;)Ljava/lang/String;
 
-    iput-object v3, v5, Lcom/dsemu/drastic/ui/RomSelector$h;->a:Landroid/graphics/Bitmap;
+    move-result-object v5
 
-    iput-boolean v4, v5, Lcom/dsemu/drastic/ui/RomSelector$h;->f:Z
+    iput-object v5, v4, Lcom/dsemu/drastic/ui/RomSelector$h;->c:Ljava/lang/String;
 
-    invoke-interface {v2, v5}, Ljava/util/List;->add(Ljava/lang/Object;)Z
+    iput-object v3, v4, Lcom/dsemu/drastic/ui/RomSelector$h;->b:Lcom/dsemu/drastic/filesystem/b;
 
-    :cond_2
-    if-eqz v0, :cond_9
+    const/4 v5, 0x1
 
-    const/4 p1, 0x0
+    iput v5, v4, Lcom/dsemu/drastic/ui/RomSelector$h;->e:I
 
-    :goto_1
-    array-length v5, v0
+    const/4 v6, 0x0
 
-    const/4 v6, 0x1
+    iput-object v6, v4, Lcom/dsemu/drastic/ui/RomSelector$h;->a:Landroid/graphics/Bitmap;
 
-    if-ge p1, v5, :cond_7
+    const/4 v7, 0x0
 
-    aget-object v5, v0, p1
+    iput-boolean v7, v4, Lcom/dsemu/drastic/ui/RomSelector$h;->f:Z
 
-    iget-object v7, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->m:Lcom/dsemu/drastic/ui/RomSelector;
+    invoke-interface {p2, v4}, Ljava/util/List;->add(Ljava/lang/Object;)Z
 
-    invoke-virtual {v7}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
+    :goto_next
+    add-int/lit8 v2, v2, 0x1
 
-    move-result-object v7
+    goto :goto_loop
 
-    invoke-interface {v5, v7}, Lcom/dsemu/drastic/filesystem/b;->i(Landroid/content/Context;)Z
-
-    move-result v5
-
-    if-nez v5, :cond_3
-
-    if-nez v1, :cond_3
-
-    aget-object v7, v0, p1
-
-    iget-object v8, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->e:Landroid/content/Context;
-
-    invoke-interface {v7, v8}, Lcom/dsemu/drastic/filesystem/b;->p(Landroid/content/Context;)Ljava/lang/String;
-
-    move-result-object v7
-
-    invoke-static {v7}, Lcom/dsemu/drastic/DraSticJNI;->isNdsFile(Ljava/lang/String;)Z
-
-    move-result v7
-
-    if-eqz v7, :cond_6
-
-    :cond_3
-    new-instance v7, Lcom/dsemu/drastic/ui/RomSelector$h;
-
-    invoke-direct {v7}, Lcom/dsemu/drastic/ui/RomSelector$h;-><init>()V
-
-    aget-object v8, v0, p1
-
-    invoke-interface {v8}, Lcom/dsemu/drastic/filesystem/b;->getRoot()Lg0/a;
-
-    move-result-object v8
-
-    if-eqz v1, :cond_4
-
-    if-eqz v8, :cond_4
-
-    const/4 v9, 0x2
-
-    new-array v9, v9, [Ljava/lang/Object;
-
-    aget-object v10, v0, p1
-
-    iget-object v11, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->e:Landroid/content/Context;
-
-    invoke-interface {v10, v11}, Lcom/dsemu/drastic/filesystem/b;->w(Landroid/content/Context;)Ljava/lang/String;
-
-    move-result-object v10
-
-    aput-object v10, v9, v4
-
-    invoke-interface {v8}, Lg0/a;->a()Ljava/lang/String;
-
-    move-result-object v8
-
-    aput-object v8, v9, v6
-
-    const-string v6, "%s (%s)"
-
-    invoke-static {v6, v9}, Ljava/lang/String;->format(Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
-
-    move-result-object v6
-
-    goto :goto_2
-
-    :cond_4
-    aget-object v6, v0, p1
-
-    iget-object v8, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->m:Lcom/dsemu/drastic/ui/RomSelector;
-
-    invoke-virtual {v8}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
-
-    move-result-object v8
-
-    invoke-interface {v6, v8}, Lcom/dsemu/drastic/filesystem/b;->w(Landroid/content/Context;)Ljava/lang/String;
-
-    move-result-object v6
-
-    :goto_2
-    iput-object v6, v7, Lcom/dsemu/drastic/ui/RomSelector$h;->c:Ljava/lang/String;
-
-    aget-object v6, v0, p1
-
-    iput-object v6, v7, Lcom/dsemu/drastic/ui/RomSelector$h;->b:Lcom/dsemu/drastic/filesystem/b;
-
-    if-eqz v1, :cond_5
-
-    iget-object v8, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->e:Landroid/content/Context;
-
-    invoke-interface {v6, v8}, Lcom/dsemu/drastic/filesystem/b;->c(Landroid/content/Context;)Z
-
-    move-result v6
-
-    if-nez v6, :cond_5
-
-    const/4 v5, 0x3
-
-    :goto_3
-    iput v5, v7, Lcom/dsemu/drastic/ui/RomSelector$h;->e:I
-
-    goto :goto_4
-
-    :cond_5
-    xor-int/lit8 v5, v5, 0x1
-
-    goto :goto_3
-
-    :goto_4
-    iput-object v3, v7, Lcom/dsemu/drastic/ui/RomSelector$h;->a:Landroid/graphics/Bitmap;
-
-    iput-boolean v4, v7, Lcom/dsemu/drastic/ui/RomSelector$h;->f:Z
-
-    invoke-interface {v2, v7}, Ljava/util/List;->add(Ljava/lang/Object;)Z
-
-    :cond_6
-    add-int/lit8 p1, p1, 0x1
-
-    goto :goto_1
-
-    :cond_7
-    invoke-interface {v2}, Ljava/util/List;->size()I
-
-    move-result p1
-
-    if-lez p1, :cond_9
-
-    invoke-interface {v2}, Ljava/util/List;->size()I
-
-    move-result p1
-
-    if-le p1, v6, :cond_8
-
-    invoke-static {}, Lcom/dsemu/drastic/ui/RomSelector;->o()Lcom/dsemu/drastic/ui/RomSelector$f;
-
-    move-result-object p1
-
-    invoke-static {v2, p1}, Ljava/util/Collections;->sort(Ljava/util/List;Ljava/util/Comparator;)V
-
-    :cond_8
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->e:Landroid/content/Context;
-
-    invoke-static {p1}, Lcom/dsemu/drastic/filesystem/d;->h(Landroid/content/Context;)Lcom/dsemu/drastic/filesystem/b;
-
-    move-result-object p1
-
-    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->e:Landroid/content/Context;
-
-    invoke-interface {p1, v0}, Lcom/dsemu/drastic/filesystem/b;->t(Landroid/content/Context;)[Lcom/dsemu/drastic/filesystem/b;
-
-    return-object v2
-
-    :cond_9
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->m:Lcom/dsemu/drastic/ui/RomSelector;
-
-    invoke-static {p1, v3}, Lcom/dsemu/drastic/ui/RomSelector;->A(Lcom/dsemu/drastic/ui/RomSelector;Ljava/util/List;)Ljava/util/List;
-
-    return-object v3
+    :cond_end
+    return-void
 .end method
 
 .method private final v()Ljava/util/List;
@@ -2092,11 +1992,26 @@
 .end method
 
 .method private synthetic y(Landroid/view/View;)V
-    .locals 0
+    .locals 2
 
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->l:Landroid/widget/PopupMenu;
+    invoke-static {}, Lcom/dsemu/drastic/filesystem/d;->k()Z
 
-    invoke-virtual {p1}, Landroid/widget/PopupMenu;->show()V
+    move-result v0
+
+    if-eqz v0, :cond_0
+
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->m:Lcom/dsemu/drastic/ui/RomSelector;
+
+    const/4 v1, 0x1
+
+    invoke-static {v0, v1}, Lcom/dsemu/drastic/filesystem/c;->k(Landroid/app/Activity;I)V
+
+    return-void
+
+    :cond_0
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->l:Landroid/widget/PopupMenu;
+
+    invoke-virtual {v0}, Landroid/widget/PopupMenu;->show()V
 
     return-void
 .end method

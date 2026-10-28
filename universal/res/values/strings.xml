@@ -39,7 +39,7 @@ Games"</string>
     <string name="search_menu_title">Search</string>
     <string name="set_moga_showmapping">Show MOGA Button Mapping</string>
     <string name="status_bar_notification_info_overflow">999+</string>
-    <string name="str_romlist_nothing_found">No game folders added. Add one with the button above!</string>
+    <string name="str_romlist_nothing_found">Nenhuma pasta de jogos. Toque em PROCURAR JOGOS e escolha a pasta!</string>
     <string name="str_add_user">Add or Delete User</string>
     <string name="str_add_user_button">Add</string>
     <string name="str_add_user_exists">User already exists</string>
