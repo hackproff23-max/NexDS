@@ -442,8 +442,6 @@
 
     invoke-virtual {v5, v0}, Landroid/view/View;->setVisibility(I)V
 
-    invoke-static {p1, v2}, Lcom/dsemu/drastic/filesystem/c;->k(Landroid/app/Activity;I)V
-
     goto :goto_8
 
     :cond_9
@@ -1992,26 +1990,50 @@
 .end method
 
 .method private synthetic y(Landroid/view/View;)V
-    .locals 2
-
-    invoke-static {}, Lcom/dsemu/drastic/filesystem/d;->k()Z
-
-    move-result v0
-
-    if-eqz v0, :cond_0
+    .locals 5
 
     iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->m:Lcom/dsemu/drastic/ui/RomSelector;
 
-    const/4 v1, 0x1
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    invoke-static {v0, v1}, Lcom/dsemu/drastic/filesystem/c;->k(Landroid/app/Activity;I)V
+    const/16 v2, 0x1e
+
+    if-lt v1, v2, :cond_pick
+
+    invoke-static {}, Landroid/os/Environment;->isExternalStorageManager()Z
+
+    move-result v1
+
+    if-nez v1, :cond_pick
+
+    invoke-virtual {v0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v2, "package:"
+
+    invoke-virtual {v2, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v1
+
+    new-instance v2, Landroid/content/Intent;
+
+    const-string v3, "android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION"
+
+    invoke-direct {v2, v3, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    invoke-virtual {v0, v2}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
 
     return-void
 
-    :cond_0
-    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->l:Landroid/widget/PopupMenu;
+    :cond_pick
+    const/4 v1, 0x4
 
-    invoke-virtual {v0}, Landroid/widget/PopupMenu;->show()V
+    invoke-static {v0, v1}, Lcom/dsemu/drastic/ui/FilePicker;->A(Landroid/app/Activity;I)V
 
     return-void
 .end method
