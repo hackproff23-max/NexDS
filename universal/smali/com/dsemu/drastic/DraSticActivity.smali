@@ -3242,6 +3242,14 @@
     invoke-virtual {v1, v0}, Landroid/view/View;->setVisibility(I)V
 
     :cond_5
+    iget-object v1, p0, Lcom/dsemu/drastic/DraSticActivity;->A:Lcom/dsemu/drastic/filesystem/b;
+
+    if-nez v1, :goto_2
+
+    iget-object v1, p0, Lcom/dsemu/drastic/DraSticActivity;->l:Landroid/widget/Button;
+
+    invoke-virtual {v1}, Landroid/view/View;->performClick()Z
+
     :goto_2
     const/16 v1, 0x11
 
@@ -7339,7 +7347,7 @@
     :cond_b
     const/16 p1, 0x1011
 
-    if-ne p2, p1, :cond_12
+    if-ne p2, p1, :nex_relaunch
 
     sget-boolean p1, Lf0/h;->f1:Z
 
@@ -7421,9 +7429,9 @@
     :cond_11
     const/16 p1, 0x1005
 
-    if-ne p2, p1, :cond_12
+    if-ne p2, p1, :nex_exit
 
-    if-eqz p3, :cond_12
+    if-eqz p3, :nex_exit
 
     invoke-virtual {p3}, Landroid/content/Intent;->getExtras()Landroid/os/Bundle;
 
@@ -7448,6 +7456,18 @@
     move-result p2
 
     goto :goto_4
+
+    :nex_exit
+    invoke-virtual {p0}, Landroid/app/Activity;->finish()V
+
+    return-void
+
+    :nex_relaunch
+    iget-object p1, p0, Lcom/dsemu/drastic/DraSticActivity;->l:Landroid/widget/Button;
+
+    invoke-virtual {p1}, Landroid/view/View;->performClick()Z
+
+    return-void
 
     :cond_12
     :goto_5
