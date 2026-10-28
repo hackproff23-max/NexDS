@@ -457,7 +457,7 @@
 
     invoke-direct {v1, v2}, Lh0/c;-><init>(Ljava/io/File;)V
 
-    const-string v2, "DraStic"
+    const-string v2, "NexDS"
 
     invoke-direct {v0, v1, v2}, Lh0/b;-><init>(Lh0/c;Ljava/lang/String;)V
 

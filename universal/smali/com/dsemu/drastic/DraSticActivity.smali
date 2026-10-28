@@ -2031,9 +2031,60 @@
     goto :goto_8
 
     :cond_e
-    const v1, 0x7f0f01ad
+    sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
-    invoke-direct {v0, v1}, Lcom/dsemu/drastic/DraSticActivity;->b1(I)V
+    const/16 v2, 0x1e
+
+    if-lt v1, v2, :nex_go
+
+    invoke-static {}, Landroid/os/Environment;->isExternalStorageManager()Z
+
+    move-result v1
+
+    if-nez v1, :nex_go
+
+    invoke-virtual {v0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
+    move-result-object v1
+
+    const-string v2, "package:"
+
+    invoke-virtual {v2, v1}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v1
+
+    new-instance v2, Landroid/content/Intent;
+
+    const-string v3, "android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION"
+
+    invoke-direct {v2, v3, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    invoke-virtual {v0, v2}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
+
+    const-string v1, "Permita o acesso a todos os arquivos e abra o app de novo"
+
+    const/4 v2, 0x1
+
+    invoke-static {v0, v1, v2}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object v1
+
+    invoke-virtual {v1}, Landroid/widget/Toast;->show()V
+
+    invoke-virtual {v0}, Landroid/app/Activity;->finish()V
+
+    goto :goto_8
+
+    :nex_go
+    sget-object v1, Lcom/dsemu/drastic/DraSticActivity$u;->n:Lcom/dsemu/drastic/DraSticActivity$u;
+
+    iput-object v1, v0, Lcom/dsemu/drastic/DraSticActivity;->B:Lcom/dsemu/drastic/DraSticActivity$u;
+
+    goto/16 :goto_0
 
     :goto_8
     return-void
