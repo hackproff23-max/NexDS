@@ -2084,6 +2084,8 @@
 
     iput-object v1, v0, Lcom/dsemu/drastic/DraSticActivity;->B:Lcom/dsemu/drastic/DraSticActivity$u;
 
+    const-string v1, "/"
+
     goto/16 :goto_0
 
     :goto_8
@@ -7496,6 +7498,73 @@
     .locals 7
 
     invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
+
+    sget v0, Landroid/os/Build$VERSION;->SDK_INT:I
+
+    const/16 v1, 0x1e
+
+    if-lt v0, v1, :nex_ok
+
+    invoke-static {}, Landroid/os/Environment;->isExternalStorageManager()Z
+
+    move-result v0
+
+    if-nez v0, :nex_ok
+
+    :try_start_nex
+    invoke-virtual {p0}, Landroid/content/Context;->getPackageName()Ljava/lang/String;
+
+    move-result-object v0
+
+    const-string v1, "package:"
+
+    invoke-virtual {v1, v0}, Ljava/lang/String;->concat(Ljava/lang/String;)Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-static {v0}, Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri;
+
+    move-result-object v0
+
+    new-instance v1, Landroid/content/Intent;
+
+    const-string v2, "android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION"
+
+    invoke-direct {v1, v2, v0}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+
+    invoke-virtual {p0, v1}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
+    :try_end_nex
+    .catch Ljava/lang/Exception; {:try_start_nex .. :try_end_nex} :catch_nex
+
+    goto :nex_after
+
+    :catch_nex
+    move-exception v0
+
+    new-instance v0, Landroid/content/Intent;
+
+    const-string v1, "android.settings.MANAGE_ALL_FILES_ACCESS_PERMISSION"
+
+    invoke-direct {v0, v1}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+
+    invoke-virtual {p0, v0}, Landroid/app/Activity;->startActivity(Landroid/content/Intent;)V
+
+    :nex_after
+    const-string v0, "Ative \"Permitir acesso a todos os arquivos\" para o NexDS e abra o app de novo"
+
+    const/4 v1, 0x1
+
+    invoke-static {p0, v0, v1}, Landroid/widget/Toast;->makeText(Landroid/content/Context;Ljava/lang/CharSequence;I)Landroid/widget/Toast;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Landroid/widget/Toast;->show()V
+
+    invoke-virtual {p0}, Landroid/app/Activity;->finish()V
+
+    return-void
+
+    :nex_ok
 
     invoke-virtual {p0}, Landroid/app/Activity;->getWindow()Landroid/view/Window;
 
