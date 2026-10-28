@@ -30,7 +30,7 @@
 
 .field private final f:Landroid/widget/TextView;
 
-.field private final g:Landroid/widget/ListView;
+.field private final g:Landroid/widget/GridView;
 
 .field private final h:Landroid/widget/TextView;
 
@@ -381,9 +381,9 @@
 
     move-result-object v1
 
-    check-cast v1, Landroid/widget/ListView;
+    check-cast v1, Landroid/widget/GridView;
 
-    iput-object v1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     invoke-virtual {v1, p0}, Landroid/widget/AdapterView;->setOnItemClickListener(Landroid/widget/AdapterView$OnItemClickListener;)V
 
@@ -655,7 +655,7 @@
 
     if-nez p1, :cond_1
 
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     const/16 p2, 0x8
 
@@ -848,7 +848,7 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     new-instance p2, Lcom/dsemu/drastic/ui/RomSelector$e$e;
 
@@ -864,7 +864,7 @@
 
     invoke-direct {p2, p0, v0, v1, v3}, Lcom/dsemu/drastic/ui/RomSelector$e$e;-><init>(Lcom/dsemu/drastic/ui/RomSelector$e;Landroid/content/Context;Ljava/util/List;Z)V
 
-    invoke-virtual {p1, p2}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
+    invoke-virtual {p1, p2}, Landroid/widget/GridView;->setAdapter(Landroid/widget/ListAdapter;)V
 
     invoke-static {}, Lcom/dsemu/drastic/ui/RomSelector;->m()Landroid/os/Parcelable;
 
@@ -872,7 +872,7 @@
 
     if-eqz p1, :cond_2
 
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     invoke-static {}, Lcom/dsemu/drastic/ui/RomSelector;->m()Landroid/os/Parcelable;
 
@@ -907,7 +907,7 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     new-instance p2, Lcom/dsemu/drastic/ui/RomSelector$e$e;
 
@@ -921,7 +921,7 @@
 
     invoke-direct {p2, p0, v0, v1, v3}, Lcom/dsemu/drastic/ui/RomSelector$e$e;-><init>(Lcom/dsemu/drastic/ui/RomSelector$e;Landroid/content/Context;Ljava/util/List;Z)V
 
-    invoke-virtual {p1, p2}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
+    invoke-virtual {p1, p2}, Landroid/widget/GridView;->setAdapter(Landroid/widget/ListAdapter;)V
 
     :cond_2
     :goto_0
@@ -1107,10 +1107,10 @@
     return p0
 .end method
 
-.method static synthetic r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/ListView;
+.method static synthetic r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/GridView;
     .locals 0
 
-    iget-object p0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object p0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     return-object p0
 .end method
@@ -2142,7 +2142,7 @@
 
     if-nez v0, :cond_0
 
-    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
 
@@ -2153,7 +2153,7 @@
     goto :goto_0
 
     :cond_0
-    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     invoke-virtual {v0, v2}, Landroid/view/View;->setVisibility(I)V
 
@@ -2162,7 +2162,7 @@
     invoke-virtual {v0, v1}, Landroid/view/View;->setVisibility(I)V
 
     :goto_0
-    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     new-instance v1, Lcom/dsemu/drastic/ui/RomSelector$e$e;
 
@@ -2186,7 +2186,7 @@
 
     invoke-direct {v1, p0, v2, v3, v4}, Lcom/dsemu/drastic/ui/RomSelector$e$e;-><init>(Lcom/dsemu/drastic/ui/RomSelector$e;Landroid/content/Context;Ljava/util/List;Z)V
 
-    invoke-virtual {v0, v1}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
+    invoke-virtual {v0, v1}, Landroid/widget/GridView;->setAdapter(Landroid/widget/ListAdapter;)V
 
     return-void
 .end method
@@ -2194,7 +2194,7 @@
 .method public N(Lcom/dsemu/drastic/filesystem/b;Lcom/dsemu/drastic/ui/RomSelector$h;)V
     .locals 5
 
-    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     invoke-virtual {v0}, Landroid/view/View;->onSaveInstanceState()Landroid/os/Parcelable;
 
@@ -2608,9 +2608,9 @@
         }
     .end annotation
 
-    check-cast p1, Landroid/widget/ListView;
+    check-cast p1, Landroid/widget/GridView;
 
-    invoke-virtual {p1}, Landroid/widget/ListView;->getAdapter()Landroid/widget/ListAdapter;
+    invoke-virtual {p1}, Landroid/widget/GridView;->getAdapter()Landroid/widget/ListAdapter;
 
     move-result-object v4
 
@@ -2852,7 +2852,7 @@
 
     invoke-virtual {p1, p2}, Landroid/widget/TextView;->setText(Ljava/lang/CharSequence;)V
 
-    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/ListView;
+    iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->g:Landroid/widget/GridView;
 
     new-instance p2, Lcom/dsemu/drastic/ui/RomSelector$e$e;
 
@@ -2876,7 +2876,7 @@
 
     invoke-direct {p2, p0, p3, p4, p5}, Lcom/dsemu/drastic/ui/RomSelector$e$e;-><init>(Lcom/dsemu/drastic/ui/RomSelector$e;Landroid/content/Context;Ljava/util/List;Z)V
 
-    invoke-virtual {p1, p2}, Landroid/widget/ListView;->setAdapter(Landroid/widget/ListAdapter;)V
+    invoke-virtual {p1, p2}, Landroid/widget/GridView;->setAdapter(Landroid/widget/ListAdapter;)V
 
     iget-object p1, p0, Lcom/dsemu/drastic/ui/RomSelector$e;->m:Lcom/dsemu/drastic/ui/RomSelector;
 
@@ -2954,9 +2954,9 @@
     return p4
 
     :cond_0
-    check-cast p1, Landroid/widget/ListView;
+    check-cast p1, Landroid/widget/GridView;
 
-    invoke-virtual {p1}, Landroid/widget/ListView;->getAdapter()Landroid/widget/ListAdapter;
+    invoke-virtual {p1}, Landroid/widget/GridView;->getAdapter()Landroid/widget/ListAdapter;
 
     move-result-object p1
 

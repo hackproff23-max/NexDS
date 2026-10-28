@@ -55,7 +55,7 @@
     :goto_0
     iget-object p3, p0, Lcom/dsemu/drastic/ui/RomSelector$e$c;->f:Lcom/dsemu/drastic/ui/RomSelector$e;
 
-    invoke-static {p3}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/ListView;
+    invoke-static {p3}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/GridView;
 
     move-result-object p3
 
@@ -67,7 +67,7 @@
 
     iget-object p3, p0, Lcom/dsemu/drastic/ui/RomSelector$e$c;->f:Lcom/dsemu/drastic/ui/RomSelector$e;
 
-    invoke-static {p3}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/ListView;
+    invoke-static {p3}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/GridView;
 
     move-result-object p3
 
@@ -116,7 +116,7 @@
     :goto_0
     iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e$c;->f:Lcom/dsemu/drastic/ui/RomSelector$e;
 
-    invoke-static {v0}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/ListView;
+    invoke-static {v0}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/GridView;
 
     move-result-object v0
 
@@ -128,7 +128,7 @@
 
     iget-object v0, p0, Lcom/dsemu/drastic/ui/RomSelector$e$c;->f:Lcom/dsemu/drastic/ui/RomSelector$e;
 
-    invoke-static {v0}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/ListView;
+    invoke-static {v0}, Lcom/dsemu/drastic/ui/RomSelector$e;->r(Lcom/dsemu/drastic/ui/RomSelector$e;)Landroid/widget/GridView;
 
     move-result-object v0
 
