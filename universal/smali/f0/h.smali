@@ -771,7 +771,7 @@
 
     move-result-object v2
 
-    const-string v3, "config/settings.dat"
+    const-string v3, "Configura\u00e7\u00f5es/settings.dat"
 
     invoke-interface {v2, v3}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -2209,7 +2209,7 @@
 
     const-string v0, ".dat"
 
-    const-string v1, "config/LC_"
+    const-string v1, "Configura\u00e7\u00f5es/LC_"
 
     const/4 v2, 0x0
 
@@ -3429,7 +3429,7 @@
 
     invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
 
-    const-string v3, "config/LC_"
+    const-string v3, "Configura\u00e7\u00f5es/LC_"
 
     invoke-virtual {v2, v3}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
 
@@ -4574,7 +4574,7 @@
 
     const-string v0, ".dat"
 
-    const-string v1, "config/LC_"
+    const-string v1, "Configura\u00e7\u00f5es/LC_"
 
     const/4 v2, 0x0
 
@@ -4714,7 +4714,7 @@
 
     move-result-object v0
 
-    const-string v1, "config/settings.dat"
+    const-string v1, "Configura\u00e7\u00f5es/settings.dat"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -6144,7 +6144,7 @@
 
     move-result-object v0
 
-    const-string v2, "config/threads.cfg"
+    const-string v2, "Configura\u00e7\u00f5es/threads.cfg"
 
     invoke-interface {v0, v2}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -6886,7 +6886,7 @@
 
     move-result-object v3
 
-    const-string v4, "config"
+    const-string v4, "Configura\u00e7\u00f5es"
 
     invoke-interface {v3, v4}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 

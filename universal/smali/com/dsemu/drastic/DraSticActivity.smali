@@ -3360,7 +3360,7 @@
 
     move-result-object v1
 
-    const-string v2, "savestates"
+    const-string v2, "Savestate"
 
     invoke-interface {v1, v2}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -4302,7 +4302,7 @@
 
     move-result-object v2
 
-    const-string v5, "config/LC_default.dat"
+    const-string v5, "Configura\u00e7\u00f5es/LC_default.dat"
 
     invoke-interface {v2, v5}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -4397,7 +4397,7 @@
     :from_shortcut
     invoke-direct {p0}, Lcom/dsemu/drastic/DraSticActivity;->l0()V
 
-    const-string v2, "virtual_controller/Simple"
+    const-string v2, "Controle/Simple"
 
     invoke-interface {v0, v2}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -4442,17 +4442,6 @@
     invoke-interface {v2, v1}, Lcom/dsemu/drastic/filesystem/b;->n(Landroid/content/Context;)Z
 
     :cond_e
-    const-string v1, "backgrounds"
-
-    invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
-
-    move-result-object v0
-
-    invoke-virtual {p0}, Landroid/content/Context;->getApplicationContext()Landroid/content/Context;
-
-    move-result-object v1
-
-    invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->s(Landroid/content/Context;)Z
 
     iput-object v3, p0, Lcom/dsemu/drastic/DraSticActivity;->s:Ljava/util/List;
 
@@ -4541,13 +4530,13 @@
 
     new-array v3, v2, [Ljava/lang/String;
 
-    const-string v4, "savestates"
+    const-string v4, "Savestate"
 
     const/4 v5, 0x0
 
     aput-object v4, v3, v5
 
-    const-string v4, "config"
+    const-string v4, "Configura\u00e7\u00f5es"
 
     const/4 v6, 0x1
 
@@ -4555,13 +4544,13 @@
 
     const/4 v4, 0x2
 
-    const-string v6, "backup"
+    const-string v6, "Saves"
 
     aput-object v6, v3, v4
 
     const/4 v4, 0x3
 
-    const-string v6, "cheats"
+    const-string v6, "Cheats"
 
     aput-object v6, v3, v4
 
@@ -4631,69 +4620,45 @@
 .method private e0(Landroid/content/Context;Lcom/dsemu/drastic/filesystem/b;)Z
     .locals 7
 
-    const/16 v0, 0xa
+    const/4 v0, 0x6
 
     new-array v1, v0, [Ljava/lang/String;
 
-    const-string v2, "backup"
+    const-string v2, "Saves"
 
     const/4 v3, 0x0
 
     aput-object v2, v1, v3
 
-    const-string v2, "savestates"
+    const-string v2, "Savestate"
 
     const/4 v4, 0x1
 
     aput-object v2, v1, v4
 
-    const/4 v2, 0x2
+    const-string v2, "Configura\u00e7\u00f5es"
 
-    const-string v5, "config"
+    const/4 v5, 0x2
 
-    aput-object v5, v1, v2
+    aput-object v2, v1, v5
 
-    const/4 v2, 0x3
+    const-string v2, "System"
 
-    const-string v5, "unzip_cache"
+    const/4 v5, 0x3
 
-    aput-object v5, v1, v2
+    aput-object v2, v1, v5
 
-    const/4 v2, 0x4
+    const-string v2, "Cheats"
 
-    const-string v5, "system"
+    const/4 v5, 0x4
 
-    aput-object v5, v1, v2
+    aput-object v2, v1, v5
 
-    const/4 v2, 0x5
+    const-string v2, "Importa\u00e7\u00e3o"
 
-    const-string v5, "input_record"
+    const/4 v5, 0x5
 
-    aput-object v5, v1, v2
-
-    const/4 v2, 0x6
-
-    const-string v5, "cheats"
-
-    aput-object v5, v1, v2
-
-    const/4 v2, 0x7
-
-    const-string v5, "slot2"
-
-    aput-object v5, v1, v2
-
-    const/16 v2, 0x8
-
-    const-string v5, "microphone"
-
-    aput-object v5, v1, v2
-
-    const/16 v2, 0x9
-
-    const-string v5, "scripts"
-
-    aput-object v5, v1, v2
+    aput-object v2, v1, v5
 
     const/4 v2, 0x0
 
@@ -4739,6 +4704,8 @@
 
 .method private f0()V
     .locals 8
+
+    return-void
 
     invoke-static {}, Lcom/dsemu/drastic/filesystem/d;->i()Lcom/dsemu/drastic/filesystem/b;
 
@@ -5099,7 +5066,7 @@
 
     move-result-object v0
 
-    const-string v1, "config"
+    const-string v1, "Configura\u00e7\u00f5es"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -5264,7 +5231,7 @@
 
     move-result-object v0
 
-    const-string v1, "system"
+    const-string v1, "System"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -5912,7 +5879,7 @@
 
     move-result-object v0
 
-    const-string v1, "virtual_controller"
+    const-string v1, "Controle"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 

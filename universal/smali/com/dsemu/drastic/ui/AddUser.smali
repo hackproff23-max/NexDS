@@ -171,25 +171,25 @@
 
     if-eqz v0, :cond_1
 
-    const-string v0, "savestates"
+    const-string v0, "Savestate"
 
     invoke-interface {p1, v0}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
     move-result-object v0
 
-    const-string v1, "config"
+    const-string v1, "Configura\u00e7\u00f5es"
 
     invoke-interface {p1, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
     move-result-object v1
 
-    const-string v2, "backup"
+    const-string v2, "Saves"
 
     invoke-interface {p1, v2}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
     move-result-object v2
 
-    const-string v3, "cheats"
+    const-string v3, "Cheats"
 
     invoke-interface {p1, v3}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 

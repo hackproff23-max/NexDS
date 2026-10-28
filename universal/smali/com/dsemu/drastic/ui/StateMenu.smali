@@ -119,7 +119,7 @@
 
     move-result-object v0
 
-    const-string v1, "savestates"
+    const-string v1, "Savestate"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -570,7 +570,7 @@
 
     aput-object v4, v2, v1
 
-    const-string v4, "savestates/%s_"
+    const-string v4, "Savestate/%s_"
 
     invoke-static {v0, v4, v2}, Ljava/lang/String;->format(Ljava/util/Locale;Ljava/lang/String;[Ljava/lang/Object;)Ljava/lang/String;
 
@@ -1250,7 +1250,7 @@
 
     move-result-object p1
 
-    const-string v1, "savestates"
+    const-string v1, "Savestate"
 
     invoke-interface {p1, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -1530,7 +1530,7 @@
 
     move-result-object v0
 
-    const-string v1, "savestates"
+    const-string v1, "Savestate"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -2040,7 +2040,7 @@
 
     move-result-object v1
 
-    const-string v3, "savestates"
+    const-string v3, "Savestate"
 
     invoke-interface {v1, v3}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
@@ -2724,7 +2724,7 @@
 
     move-result-object v0
 
-    const-string v1, "savestates"
+    const-string v1, "Savestate"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 

@@ -2474,7 +2474,7 @@
 
     move-result-object v0
 
-    const-string v1, "virtual_controller"
+    const-string v1, "Controle"
 
     invoke-interface {v0, v1}, Lcom/dsemu/drastic/filesystem/b;->u(Ljava/lang/String;)Lcom/dsemu/drastic/filesystem/b;
 
