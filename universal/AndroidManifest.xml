@@ -3,20 +3,11 @@
     <uses-permission android:maxSdkVersion="28" android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:maxSdkVersion="28" android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <uses-permission android:name="android.permission.VIBRATE"/>
-    <uses-permission android:maxSdkVersion="30" android:name="android.permission.BLUETOOTH"/>
-    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
-    <uses-permission android:maxSdkVersion="26" android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
     <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
     <uses-feature android:name="android.hardware.screen.landscape" android:required="false"/>
-    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
-    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
-    <uses-feature android:name="android.hardware.audio.low_latency" android:required="false"/>
     <uses-feature android:name="android.hardware.screen.portrait" android:required="false"/>
     <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
-    <uses-feature android:name="android.hardware.gamepad" android:required="true"/>
-    <uses-feature android:name="android.software.leanback" android:required="false"/>
     <supports-screens android:largeScreens="true" android:normalScreens="true" android:smallScreens="true" android:xlargeScreens="true"/>
     <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:banner="@drawable/banner_icon" android:hasFragileUserData="true" android:icon="@drawable/ic_launcher" android:isGame="true" android:label="@string/app_name" android:largeHeap="true" android:logo="@drawable/banner_icon" android:name="com.dsemu.drastic.DraSticApplication" android:persistent="false" android:theme="@style/AppBaseTheme">
         <meta-data android:name="xperiaplayoptimized_content" android:resource="@drawable/ic_launcher"/>

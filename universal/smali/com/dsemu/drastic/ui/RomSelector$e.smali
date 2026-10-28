@@ -442,6 +442,8 @@
 
     invoke-virtual {v5, v0}, Landroid/view/View;->setVisibility(I)V
 
+    invoke-static {p1}, Lcom/dsemu/drastic/ui/RomSelector$e;->nexPick(Landroid/app/Activity;)V
+
     goto :goto_8
 
     :cond_9
@@ -1987,6 +1989,16 @@
         :pswitch_1
         :pswitch_0
     .end packed-switch
+.end method
+
+.method public static nexPick(Landroid/app/Activity;)V
+    .locals 2
+
+    const/4 v0, 0x4
+
+    invoke-static {p0, v0}, Lcom/dsemu/drastic/ui/FilePicker;->A(Landroid/app/Activity;I)V
+
+    return-void
 .end method
 
 .method private synthetic y(Landroid/view/View;)V

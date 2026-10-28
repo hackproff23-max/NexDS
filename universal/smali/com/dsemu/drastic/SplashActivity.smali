@@ -47,6 +47,18 @@
 
     invoke-super {p0, p1}, Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V
 
+    invoke-static {p0}, Lcom/dsemu/drastic/CrashLog;->install(Landroid/content/Context;)V
+
+    invoke-static {p0}, Lcom/dsemu/drastic/CrashLog;->show(Landroid/app/Activity;)Z
+
+    move-result v0
+
+    if-eqz v0, :nex_cont
+
+    return-void
+
+    :nex_cont
+
     new-instance v0, Landroid/widget/LinearLayout;
 
     invoke-direct {v0, p0}, Landroid/widget/LinearLayout;-><init>(Landroid/content/Context;)V
