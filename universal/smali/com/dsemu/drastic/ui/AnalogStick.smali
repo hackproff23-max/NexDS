@@ -92,8 +92,41 @@
 .end method
 
 .method public static attachGame(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;)V
-    .locals 2
+    .locals 3
 
+    :try_start_0
+    const v0, 0x1020002
+
+    invoke-virtual {p0, v0}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+
+    move-result-object v0
+
+    check-cast v0, Landroid/view/ViewGroup;
+
+    if-eqz v0, :cond_end
+
+    const/4 v1, 0x1
+
+    invoke-virtual {v0, v1}, Landroid/view/ViewGroup;->setMotionEventSplittingEnabled(Z)V
+
+    const/4 v1, 0x0
+
+    invoke-virtual {v0, v1}, Landroid/view/ViewGroup;->getChildAt(I)Landroid/view/View;
+
+    move-result-object v1
+
+    if-eqz v1, :cond_end
+
+    new-instance v2, Lcom/dsemu/drastic/ui/AnalogStick$G;
+
+    invoke-direct {v2, p1}, Lcom/dsemu/drastic/ui/AnalogStick$G;-><init>(Lcom/dsemu/drastic/DraSticGlView;)V
+
+    invoke-virtual {v1, v2}, Landroid/view/View;->setOnTouchListener(Landroid/view/View$OnTouchListener;)V
+    :try_end_0
+    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+
+    :cond_end
+    :goto_0
     const/4 v0, 0x0
 
     const/4 v1, 0x1
@@ -103,6 +136,11 @@
     invoke-static {p0, p1, v0, v1}, Lcom/dsemu/drastic/ui/AnalogStick;->add(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;ZI)V
 
     return-void
+
+    :catch_0
+    move-exception v0
+
+    goto :goto_0
 .end method
 
 .method private applyMask(I)V
