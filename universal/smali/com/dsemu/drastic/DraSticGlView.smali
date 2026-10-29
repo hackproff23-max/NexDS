@@ -3202,3 +3202,48 @@
 
     return-void
 .end method
+
+
+.method public penCenter2()I
+    .locals 1
+
+    iget-object v0, p0, Lcom/dsemu/drastic/DraSticGlView;->g:Ln0/i;
+
+    invoke-virtual {v0}, Ln0/i;->penCenter()I
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public penDown2(II)V
+    .locals 1
+
+    iget-object v0, p0, Lcom/dsemu/drastic/DraSticGlView;->g:Ln0/i;
+
+    invoke-virtual {v0, p1, p2}, Ln0/i;->penDown(II)V
+
+    return-void
+.end method
+
+.method public penIn2(II)Z
+    .locals 1
+
+    iget-object v0, p0, Lcom/dsemu/drastic/DraSticGlView;->g:Ln0/i;
+
+    invoke-virtual {v0, p1, p2}, Ln0/i;->j(II)Z
+
+    move-result v0
+
+    return v0
+.end method
+
+.method public penUp2()V
+    .locals 1
+
+    iget-object v0, p0, Lcom/dsemu/drastic/DraSticGlView;->g:Ln0/i;
+
+    invoke-virtual {v0}, Ln0/i;->penUp()V
+
+    return-void
+.end method

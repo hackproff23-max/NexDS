@@ -2,9 +2,36 @@
 .super Landroid/view/View;
 .source "AnalogStick.java"
 
-
 # instance fields
 .field private alpha:I
+
+.field private bmpBase:Landroid/graphics/Bitmap;
+
+.field private bmpKnob:Landroid/graphics/Bitmap;
+
+.field private curX:F
+
+.field private curY:F
+
+.field private inDead:Z
+
+.field private kind:I
+
+.field private looping:Z
+
+.field private penDown:Z
+
+.field private rHold:Ljava/lang/Runnable;
+
+.field private rLoop:Ljava/lang/Runnable;
+
+.field private rTap:Ljava/lang/Runnable;
+
+.field private rect:Landroid/graphics/RectF;
+
+.field private vx:F
+
+.field private vy:F
 
 .field private cx:F
 
@@ -48,164 +75,32 @@
 
 .field private sz:F
 
-
 # direct methods
+
 .method public static attachEdit(Landroid/app/Activity;)V
-    .locals 4
+    .locals 3
 
     const/4 v0, 0x0
 
-    :try_start_0
-    new-instance v1, Lcom/dsemu/drastic/ui/AnalogStick;
+    const/4 v1, 0x1
 
-    const/4 v2, 0x1
+    invoke-static {p0, v0, v1, v0}, Lcom/dsemu/drastic/ui/AnalogStick;->add(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;ZI)V
 
-    invoke-direct {v1, p0, v0, v2}, Lcom/dsemu/drastic/ui/AnalogStick;-><init>(Landroid/content/Context;Lcom/dsemu/drastic/DraSticGlView;Z)V
+    invoke-static {p0, v0, v1, v1}, Lcom/dsemu/drastic/ui/AnalogStick;->add(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;ZI)V
 
-    const v2, 0x1020002
-
-    invoke-virtual {p0, v2}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v2
-
-    check-cast v2, Landroid/view/ViewGroup;
-
-    if-eqz v2, :cond_0
-
-    new-instance v3, Landroid/widget/FrameLayout$LayoutParams;
-
-    const/4 v0, -0x1
-
-    invoke-direct {v3, v0, v0}, Landroid/widget/FrameLayout$LayoutParams;-><init>(II)V
-
-    invoke-virtual {v2, v1, v3}, Landroid/view/ViewGroup;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
-    :try_end_0
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
-
-    :cond_0
-    :goto_0
     return-void
-
-    :catch_0
-    move-exception v0
-
-    goto :goto_0
 .end method
 
 .method public static attachGame(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;)V
-    .locals 4
+    .locals 2
 
-    :try_start_0
-    new-instance v1, Lcom/dsemu/drastic/ui/AnalogStick;
+    const/4 v0, 0x0
 
-    const/4 v2, 0x0
+    const/4 v1, 0x1
 
-    invoke-direct {v1, p0, p1, v2}, Lcom/dsemu/drastic/ui/AnalogStick;-><init>(Landroid/content/Context;Lcom/dsemu/drastic/DraSticGlView;Z)V
+    invoke-static {p0, p1, v0, v0}, Lcom/dsemu/drastic/ui/AnalogStick;->add(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;ZI)V
 
-    const v2, 0x1020002
-
-    invoke-virtual {p0, v2}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
-
-    move-result-object v2
-
-    check-cast v2, Landroid/view/ViewGroup;
-
-    if-eqz v2, :cond_0
-
-    new-instance v3, Landroid/widget/FrameLayout$LayoutParams;
-
-    const/4 v0, -0x1
-
-    invoke-direct {v3, v0, v0}, Landroid/widget/FrameLayout$LayoutParams;-><init>(II)V
-
-    invoke-virtual {v2, v1, v3}, Landroid/view/ViewGroup;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
-    :try_end_0
-    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
-
-    :cond_0
-    :goto_0
-    return-void
-
-    :catch_0
-    move-exception v0
-
-    goto :goto_0
-.end method
-
-.method public constructor <init>(Landroid/content/Context;Lcom/dsemu/drastic/DraSticGlView;Z)V
-    .locals 4
-
-    invoke-direct {p0, p1}, Landroid/view/View;-><init>(Landroid/content/Context;)V
-
-    iput-object p2, p0, Lcom/dsemu/drastic/ui/AnalogStick;->gl:Lcom/dsemu/drastic/DraSticGlView;
-
-    iput-boolean p3, p0, Lcom/dsemu/drastic/ui/AnalogStick;->edit:Z
-
-    const/4 v0, -0x1
-
-    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pid:I
-
-    const v0, 0x3e4ccccd
-
-    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->cx:F
-
-    const v0, 0x3f3851ec
-
-    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->cy:F
-
-    const v0, 0x3e4ccccd
-
-    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->sz:F
-
-    const/16 v0, 0xaa
-
-    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->alpha:I
-
-    invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
-
-    move-result-object v0
-
-    invoke-virtual {v0}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
-
-    move-result-object v0
-
-    iget v0, v0, Landroid/util/DisplayMetrics;->density:F
-
-    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->dens:F
-
-    new-instance v1, Landroid/graphics/Paint;
-
-    const/4 v2, 0x1
-
-    invoke-direct {v1, v2}, Landroid/graphics/Paint;-><init>(I)V
-
-    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pFill:Landroid/graphics/Paint;
-
-    new-instance v1, Landroid/graphics/Paint;
-
-    invoke-direct {v1, v2}, Landroid/graphics/Paint;-><init>(I)V
-
-    const/high16 v3, 0x41400000    # 12.0f
-
-    mul-float/2addr v3, v0
-
-    invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setTextSize(F)V
-
-    sget-object v3, Landroid/graphics/Paint$Align;->CENTER:Landroid/graphics/Paint$Align;
-
-    invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
-
-    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pText:Landroid/graphics/Paint;
-
-    const-string v1, "nexds_analog"
-
-    const/4 v2, 0x0
-
-    invoke-virtual {p1, v1, v2}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
-
-    move-result-object v1
-
-    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->prefs:Landroid/content/SharedPreferences;
+    invoke-static {p0, p1, v0, v1}, Lcom/dsemu/drastic/ui/AnalogStick;->add(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;ZI)V
 
     return-void
 .end method
@@ -410,17 +305,33 @@
 .end method
 
 .method private key(Ljava/lang/String;)Ljava/lang/String;
-    .locals 1
+    .locals 2
 
     iget-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->land:Z
 
-    if-eqz v0, :cond_0
+    iget v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kind:I
+
+    if-eqz v1, :cond_k0
+
+    if-eqz v0, :cond_q
+
+    const-string v0, "M"
+
+    goto :goto_0
+
+    :cond_q
+    const-string v0, "Q"
+
+    goto :goto_0
+
+    :cond_k0
+    if-eqz v0, :cond_p
 
     const-string v0, "L"
 
     goto :goto_0
 
-    :cond_0
+    :cond_p
     const-string v0, "P"
 
     :goto_0
@@ -521,6 +432,12 @@
     iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kx:F
 
     iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->ky:F
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vx:F
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vy:F
+
+    iput-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->inDead:Z
 
     const/4 v1, -0x1
 
@@ -978,7 +895,7 @@
 .end method
 
 .method private touchGame(Landroid/view/MotionEvent;I)Z
-    .locals 6
+    .locals 8
 
     iget-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->enabled:Z
 
@@ -1047,6 +964,21 @@
 
     iput v5, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pid:I
 
+    iget v5, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kind:I
+
+    if-eqz v5, :cond_dn0
+
+    const/4 v5, 0x1
+
+    iput-boolean v5, p0, Lcom/dsemu/drastic/ui/AnalogStick;->inDead:Z
+
+    iget-object v5, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rHold:Ljava/lang/Runnable;
+
+    const-wide/16 v6, 0x12c
+
+    invoke-virtual {p0, v5, v6, v7}, Landroid/view/View;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    :cond_dn0
     invoke-direct {p0, v3, v4}, Lcom/dsemu/drastic/ui/AnalogStick;->update(FF)V
 
     goto :cond_true
@@ -1089,7 +1021,7 @@
 
     if-ne v2, v1, :cond_false
 
-    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->release()V
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->endTouch()V
 
     goto :cond_true
 
@@ -1098,7 +1030,7 @@
 
     if-eq v1, v2, :cond_false
 
-    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->release()V
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->endTouch()V
 
     goto :cond_true
 .end method
@@ -1161,6 +1093,18 @@
     iput v12, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kx:F
 
     iput v13, p0, Lcom/dsemu/drastic/ui/AnalogStick;->ky:F
+
+    iget v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kind:I
+
+    if-eqz v6, :cond_k0
+
+    invoke-direct {p0, v3, v4, v5, v2}, Lcom/dsemu/drastic/ui/AnalogStick;->penStick(FFFF)V
+
+    invoke-virtual {p0}, Landroid/view/View;->invalidate()V
+
+    return-void
+
+    :cond_k0
 
     const/4 v10, 0x0
 
@@ -1227,14 +1171,14 @@
     return-void
 .end method
 
-
-# virtual methods
 .method protected onDetachedFromWindow()V
     .locals 1
 
     const/4 v0, 0x0
 
     invoke-direct {p0, v0}, Lcom/dsemu/drastic/ui/AnalogStick;->applyMask(I)V
+
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->penRelease()V
 
     invoke-super {p0}, Landroid/view/View;->onDetachedFromWindow()V
 
@@ -1276,6 +1220,35 @@
     :cond_a
     iget-object v5, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pFill:Landroid/graphics/Paint;
 
+    iget-object v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->bmpBase:Landroid/graphics/Bitmap;
+
+    if-eqz v6, :cond_circ
+
+    iget-object v7, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rect:Landroid/graphics/RectF;
+
+    sub-float v8, v1, v3
+
+    sub-float v9, v2, v3
+
+    add-float v10, v1, v3
+
+    add-float v11, v2, v3
+
+    invoke-virtual {v7, v8, v9, v10, v11}, Landroid/graphics/RectF;->set(FFFF)V
+
+    const/4 v8, -0x1
+
+    invoke-virtual {v5, v8}, Landroid/graphics/Paint;->setColor(I)V
+
+    invoke-virtual {v5, v4}, Landroid/graphics/Paint;->setAlpha(I)V
+
+    const/4 v8, 0x0
+
+    invoke-virtual {p1, v6, v8, v7, v5}, Landroid/graphics/Canvas;->drawBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/RectF;Landroid/graphics/Paint;)V
+
+    goto :cond_knob
+
+    :cond_circ
     sget-object v6, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;
 
     invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V
@@ -1306,29 +1279,115 @@
 
     invoke-virtual {p1, v1, v2, v3, v5}, Landroid/graphics/Canvas;->drawCircle(FFFLandroid/graphics/Paint;)V
 
+    :cond_knob
     sget-object v6, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;
 
     invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V
 
-    const v6, 0x3ed70a3d    # 0.42f
+    const/4 v6, -0x1
 
-    mul-float/2addr v6, v3
+    invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setColor(I)V
 
-    iget v8, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kx:F
+    const v8, 0x3ed70a3d    # 0.42f
 
-    add-float/2addr v8, v1
+    mul-float/2addr v8, v3
 
-    iget v9, p0, Lcom/dsemu/drastic/ui/AnalogStick;->ky:F
+    iget v9, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kx:F
 
-    add-float/2addr v9, v2
+    add-float/2addr v9, v1
+
+    iget v10, p0, Lcom/dsemu/drastic/ui/AnalogStick;->ky:F
+
+    add-float/2addr v10, v2
 
     invoke-virtual {v5, v4}, Landroid/graphics/Paint;->setAlpha(I)V
 
+    iget-object v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->bmpKnob:Landroid/graphics/Bitmap;
+
+    if-eqz v6, :cond_kc
+
+    iget-object v7, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rect:Landroid/graphics/RectF;
+
+    sub-float v0, v9, v8
+
+    sub-float v11, v10, v8
+
+    add-float/2addr v9, v8
+
+    add-float/2addr v10, v8
+
+    invoke-virtual {v7, v0, v11, v9, v10}, Landroid/graphics/RectF;->set(FFFF)V
+
+    const/4 v8, 0x0
+
+    invoke-virtual {p1, v6, v8, v7, v5}, Landroid/graphics/Canvas;->drawBitmap(Landroid/graphics/Bitmap;Landroid/graphics/Rect;Landroid/graphics/RectF;Landroid/graphics/Paint;)V
+
+    goto :cond_cur
+
+    :cond_kc
+    invoke-virtual {p1, v9, v10, v8, v5}, Landroid/graphics/Canvas;->drawCircle(FFFLandroid/graphics/Paint;)V
+
+    :cond_cur
+    iget v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kind:I
+
+    if-eqz v6, :cond_nocur
+
+    iget v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    const/4 v7, 0x0
+
+    cmpl-float v6, v6, v7
+
+    if-ltz v6, :cond_nocur
+
+    sget-object v6, Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;
+
+    invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V
+
+    iget-boolean v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->penDown:Z
+
+    if-eqz v6, :cond_wc
+
+    const v6, -0x10000
+
+    goto :goto_sc
+
+    :cond_wc
+    const/4 v6, -0x1
+
+    :goto_sc
+    invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setColor(I)V
+
+    const/16 v6, 0xff
+
+    invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setAlpha(I)V
+
+    const/high16 v6, 0x40000000    # 2.0f
+
+    iget v7, p0, Lcom/dsemu/drastic/ui/AnalogStick;->dens:F
+
+    mul-float/2addr v6, v7
+
+    invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setStrokeWidth(F)V
+
+    const/high16 v6, 0x41000000    # 8.0f
+
+    mul-float/2addr v6, v7
+
+    iget v8, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    iget v9, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
+
     invoke-virtual {p1, v8, v9, v6, v5}, Landroid/graphics/Canvas;->drawCircle(FFFLandroid/graphics/Paint;)V
 
+    :cond_nocur
     iget-boolean v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->edit:Z
 
     if-eqz v6, :cond_end
+
+    sget-object v6, Landroid/graphics/Paint$Style;->FILL:Landroid/graphics/Paint$Style;
+
+    invoke-virtual {v5, v6}, Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V
 
     const v6, 0x3f350481    # 0.7071f
 
@@ -1362,13 +1421,29 @@
 
     iget-boolean v7, p0, Lcom/dsemu/drastic/ui/AnalogStick;->enabled:Z
 
+    iget v8, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kind:I
+
     if-eqz v7, :cond_off
 
+    if-eqz v8, :cond_on0
+
+    const-string v7, "CANETA"
+
+    goto :goto_lbl
+
+    :cond_on0
     const-string v7, "ANALOG 8"
 
     goto :goto_lbl
 
     :cond_off
+    if-eqz v8, :cond_off0
+
+    const-string v7, "CANETA (OFF) - toque p/ ativar"
+
+    goto :goto_lbl
+
+    :cond_off0
     const-string v7, "ANALOG 8 (OFF) - toque p/ ativar"
 
     :goto_lbl
@@ -1397,7 +1472,7 @@
 .end method
 
 .method protected onSizeChanged(IIII)V
-    .locals 1
+    .locals 2
 
     invoke-super {p0, p1, p2, p3, p4}, Landroid/view/View;->onSizeChanged(IIII)V
 
@@ -1416,6 +1491,12 @@
     invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->load()V
 
     invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->clamp()V
+
+    const/high16 v1, -0x40800000    # -1.0f
+
+    iput v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    iput v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
 
     return-void
 .end method
@@ -1443,4 +1524,624 @@
     move-result v0
 
     return v0
+.end method
+
+.method private static add(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;ZI)V
+    .locals 4
+
+    :try_start_0
+    new-instance v0, Lcom/dsemu/drastic/ui/AnalogStick;
+
+    invoke-direct {v0, p0, p1, p2, p3}, Lcom/dsemu/drastic/ui/AnalogStick;-><init>(Landroid/content/Context;Lcom/dsemu/drastic/DraSticGlView;ZI)V
+
+    const v1, 0x1020002
+
+    invoke-virtual {p0, v1}, Landroid/app/Activity;->findViewById(I)Landroid/view/View;
+
+    move-result-object v1
+
+    check-cast v1, Landroid/view/ViewGroup;
+
+    if-eqz v1, :cond_0
+
+    new-instance v2, Landroid/widget/FrameLayout$LayoutParams;
+
+    const/4 v3, -0x1
+
+    invoke-direct {v2, v3, v3}, Landroid/widget/FrameLayout$LayoutParams;-><init>(II)V
+
+    invoke-virtual {v1, v0, v2}, Landroid/view/ViewGroup;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V
+    :try_end_0
+    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+
+    :cond_0
+    :goto_0
+    return-void
+
+    :catch_0
+    move-exception v0
+
+    goto :goto_0
+.end method
+
+.method public constructor <init>(Landroid/content/Context;Lcom/dsemu/drastic/DraSticGlView;ZI)V
+    .locals 5
+
+    invoke-direct {p0, p1}, Landroid/view/View;-><init>(Landroid/content/Context;)V
+
+    iput-object p2, p0, Lcom/dsemu/drastic/ui/AnalogStick;->gl:Lcom/dsemu/drastic/DraSticGlView;
+
+    iput-boolean p3, p0, Lcom/dsemu/drastic/ui/AnalogStick;->edit:Z
+
+    const/4 v0, -0x1
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pid:I
+
+    const v0, 0x3e4ccccd
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->cx:F
+
+    const v0, 0x3f3851ec
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->cy:F
+
+    const v0, 0x3e4ccccd
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->sz:F
+
+    const/16 v0, 0xaa
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->alpha:I
+
+    invoke-virtual {p1}, Landroid/content/Context;->getResources()Landroid/content/res/Resources;
+
+    move-result-object v0
+
+    invoke-virtual {v0}, Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;
+
+    move-result-object v0
+
+    iget v0, v0, Landroid/util/DisplayMetrics;->density:F
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->dens:F
+
+    new-instance v1, Landroid/graphics/Paint;
+
+    const/4 v2, 0x3
+
+    invoke-direct {v1, v2}, Landroid/graphics/Paint;-><init>(I)V
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pFill:Landroid/graphics/Paint;
+
+    const/4 v2, 0x1
+
+    new-instance v1, Landroid/graphics/Paint;
+
+    invoke-direct {v1, v2}, Landroid/graphics/Paint;-><init>(I)V
+
+    const/high16 v3, 0x41400000    # 12.0f
+
+    mul-float/2addr v3, v0
+
+    invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setTextSize(F)V
+
+    sget-object v3, Landroid/graphics/Paint$Align;->CENTER:Landroid/graphics/Paint$Align;
+
+    invoke-virtual {v1, v3}, Landroid/graphics/Paint;->setTextAlign(Landroid/graphics/Paint$Align;)V
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pText:Landroid/graphics/Paint;
+
+    const-string v1, "nexds_analog"
+
+    const/4 v2, 0x0
+
+    invoke-virtual {p1, v1, v2}, Landroid/content/Context;->getSharedPreferences(Ljava/lang/String;I)Landroid/content/SharedPreferences;
+
+    move-result-object v1
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->prefs:Landroid/content/SharedPreferences;
+
+    iput p4, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kind:I
+
+    if-eqz p4, :cond_k0
+
+    const v1, 0x3f4ccccd
+
+    iput v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->cx:F
+
+    :cond_k0
+    const/high16 v1, -0x40800000    # -1.0f
+
+    iput v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    iput v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
+
+    new-instance v1, Landroid/graphics/RectF;
+
+    invoke-direct {v1}, Landroid/graphics/RectF;-><init>()V
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rect:Landroid/graphics/RectF;
+
+    new-instance v1, Lcom/dsemu/drastic/ui/AnalogStick$T;
+
+    const/4 v2, 0x1
+
+    invoke-direct {v1, p0, v2}, Lcom/dsemu/drastic/ui/AnalogStick$T;-><init>(Lcom/dsemu/drastic/ui/AnalogStick;I)V
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rHold:Ljava/lang/Runnable;
+
+    new-instance v1, Lcom/dsemu/drastic/ui/AnalogStick$T;
+
+    const/4 v2, 0x2
+
+    invoke-direct {v1, p0, v2}, Lcom/dsemu/drastic/ui/AnalogStick$T;-><init>(Lcom/dsemu/drastic/ui/AnalogStick;I)V
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rTap:Ljava/lang/Runnable;
+
+    new-instance v1, Lcom/dsemu/drastic/ui/AnalogStick$T;
+
+    const/4 v2, 0x3
+
+    invoke-direct {v1, p0, v2}, Lcom/dsemu/drastic/ui/AnalogStick$T;-><init>(Lcom/dsemu/drastic/ui/AnalogStick;I)V
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rLoop:Ljava/lang/Runnable;
+
+    if-eqz p4, :cond_n0
+
+    const-string v1, "analog/pen_base.png"
+
+    const-string v2, "analog/pen_knob.png"
+
+    goto :goto_n
+
+    :cond_n0
+    const-string v1, "analog/analog_base.png"
+
+    const-string v2, "analog/analog_knob.png"
+
+    :goto_n
+    invoke-direct {p0, p1, v1}, Lcom/dsemu/drastic/ui/AnalogStick;->loadBmp(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;
+
+    move-result-object v1
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->bmpBase:Landroid/graphics/Bitmap;
+
+    invoke-direct {p0, p1, v2}, Lcom/dsemu/drastic/ui/AnalogStick;->loadBmp(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;
+
+    move-result-object v1
+
+    iput-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->bmpKnob:Landroid/graphics/Bitmap;
+
+    return-void
+.end method
+
+.method private loadBmp(Landroid/content/Context;Ljava/lang/String;)Landroid/graphics/Bitmap;
+    .locals 3
+
+    const/4 v0, 0x0
+
+    :try_start_0
+    invoke-virtual {p1}, Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;
+
+    move-result-object v1
+
+    invoke-virtual {v1, p2}, Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;
+
+    move-result-object v1
+
+    invoke-static {v1}, Landroid/graphics/BitmapFactory;->decodeStream(Ljava/io/InputStream;)Landroid/graphics/Bitmap;
+
+    move-result-object v0
+
+    invoke-virtual {v1}, Ljava/io/InputStream;->close()V
+    :try_end_0
+    .catch Ljava/lang/Throwable; {:try_start_0 .. :try_end_0} :catch_0
+
+    :goto_0
+    return-object v0
+
+    :catch_0
+    move-exception v1
+
+    goto :goto_0
+.end method
+
+.method private penPress()V
+    .locals 3
+
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->gl:Lcom/dsemu/drastic/DraSticGlView;
+
+    if-eqz v0, :cond_0
+
+    iget v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    float-to-int v1, v1
+
+    iget v2, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
+
+    float-to-int v2, v2
+
+    invoke-virtual {v0, v1, v2}, Lcom/dsemu/drastic/DraSticGlView;->penDown2(II)V
+
+    :cond_0
+    return-void
+.end method
+
+.method private penRelease()V
+    .locals 2
+
+    iget-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->penDown:Z
+
+    if-eqz v0, :cond_0
+
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->penDown:Z
+
+    iget-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->gl:Lcom/dsemu/drastic/DraSticGlView;
+
+    if-eqz v1, :cond_1
+
+    invoke-virtual {v1}, Lcom/dsemu/drastic/DraSticGlView;->penUp2()V
+
+    :cond_1
+    invoke-virtual {p0}, Landroid/view/View;->invalidate()V
+
+    :cond_0
+    return-void
+.end method
+
+.method private ensureCur()V
+    .locals 4
+
+    iget v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    const/4 v1, 0x0
+
+    cmpl-float v0, v0, v1
+
+    if-ltz v0, :cond_need
+
+    return-void
+
+    :cond_need
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->gl:Lcom/dsemu/drastic/DraSticGlView;
+
+    const/4 v2, 0x0
+
+    if-eqz v0, :cond_c
+
+    invoke-virtual {v0}, Lcom/dsemu/drastic/DraSticGlView;->penCenter2()I
+
+    move-result v2
+
+    :cond_c
+    if-eqz v2, :cond_fb
+
+    ushr-int/lit8 v0, v2, 0x10
+
+    int-to-float v0, v0
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    const v1, 0xffff
+
+    and-int/2addr v1, v2
+
+    int-to-float v1, v1
+
+    iput v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
+
+    return-void
+
+    :cond_fb
+    invoke-virtual {p0}, Landroid/view/View;->getWidth()I
+
+    move-result v0
+
+    div-int/lit8 v0, v0, 0x2
+
+    int-to-float v0, v0
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    invoke-virtual {p0}, Landroid/view/View;->getHeight()I
+
+    move-result v1
+
+    mul-int/lit8 v1, v1, 0x3
+
+    div-int/lit8 v1, v1, 0x4
+
+    int-to-float v1, v1
+
+    iput v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
+
+    return-void
+.end method
+
+.method private loopStep()V
+    .locals 10
+
+    iget v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pid:I
+
+    const/4 v1, -0x1
+
+    if-ne v0, v1, :cond_run
+
+    const/4 v0, 0x0
+
+    iput-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->looping:Z
+
+    return-void
+
+    :cond_run
+    iget v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vx:F
+
+    iget v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vy:F
+
+    const/4 v2, 0x0
+
+    cmpl-float v3, v0, v2
+
+    if-nez v3, :cond_mv
+
+    cmpl-float v3, v1, v2
+
+    if-nez v3, :cond_mv
+
+    iput-boolean v2, p0, Lcom/dsemu/drastic/ui/AnalogStick;->looping:Z
+
+    return-void
+
+    :cond_mv
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->ensureCur()V
+
+    const/high16 v2, 0x41200000    # 10.0f
+
+    iget v3, p0, Lcom/dsemu/drastic/ui/AnalogStick;->dens:F
+
+    mul-float/2addr v2, v3
+
+    mul-float/2addr v0, v2
+
+    mul-float/2addr v1, v2
+
+    iget v4, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    iget v5, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
+
+    iget-object v9, p0, Lcom/dsemu/drastic/ui/AnalogStick;->gl:Lcom/dsemu/drastic/DraSticGlView;
+
+    add-float v6, v4, v0
+
+    if-eqz v9, :cond_ax
+
+    float-to-int v7, v6
+
+    float-to-int v8, v5
+
+    invoke-virtual {v9, v7, v8}, Lcom/dsemu/drastic/DraSticGlView;->penIn2(II)Z
+
+    move-result v7
+
+    if-eqz v7, :cond_ay
+
+    :cond_ax
+    iput v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curX:F
+
+    move v4, v6
+
+    :cond_ay
+    add-float v6, v5, v1
+
+    if-eqz v9, :cond_bx
+
+    float-to-int v7, v4
+
+    float-to-int v8, v6
+
+    invoke-virtual {v9, v7, v8}, Lcom/dsemu/drastic/DraSticGlView;->penIn2(II)Z
+
+    move-result v7
+
+    if-eqz v7, :cond_after
+
+    :cond_bx
+    iput v6, p0, Lcom/dsemu/drastic/ui/AnalogStick;->curY:F
+
+    :cond_after
+    iget-boolean v7, p0, Lcom/dsemu/drastic/ui/AnalogStick;->penDown:Z
+
+    if-eqz v7, :cond_inv
+
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->penPress()V
+
+    :cond_inv
+    invoke-virtual {p0}, Landroid/view/View;->invalidate()V
+
+    iget-object v7, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rLoop:Ljava/lang/Runnable;
+
+    const-wide/16 v8, 0x10
+
+    invoke-virtual {p0, v7, v8, v9}, Landroid/view/View;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    return-void
+.end method
+
+.method private penStick(FFFF)V
+    .locals 5
+
+    const v0, 0x3e8f5c29    # 0.28f
+
+    mul-float/2addr v0, p4
+
+    cmpg-float v1, p3, v0
+
+    if-gez v1, :cond_out
+
+    const/4 v0, 0x0
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vx:F
+
+    iput v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vy:F
+
+    return-void
+
+    :cond_out
+    iget-boolean v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->inDead:Z
+
+    if-eqz v1, :cond_nc
+
+    const/4 v1, 0x0
+
+    iput-boolean v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->inDead:Z
+
+    iget-object v1, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rHold:Ljava/lang/Runnable;
+
+    invoke-virtual {p0, v1}, Landroid/view/View;->removeCallbacks(Ljava/lang/Runnable;)Z
+
+    :cond_nc
+    const v0, 0x3f147ae1    # 0.58f
+
+    mul-float/2addr v0, p4
+
+    const v1, 0x3e8f5c29    # 0.28f
+
+    mul-float/2addr v1, p4
+
+    sub-float v2, p3, v1
+
+    sub-float v3, v0, v1
+
+    div-float/2addr v2, v3
+
+    const/high16 v3, 0x3f800000    # 1.0f
+
+    invoke-static {v3, v2}, Ljava/lang/Math;->min(FF)F
+
+    move-result v2
+
+    div-float v3, p1, p3
+
+    mul-float/2addr v3, v2
+
+    iput v3, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vx:F
+
+    div-float v3, p2, p3
+
+    mul-float/2addr v3, v2
+
+    iput v3, p0, Lcom/dsemu/drastic/ui/AnalogStick;->vy:F
+
+    iget-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->looping:Z
+
+    if-nez v0, :cond_done
+
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->looping:Z
+
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rLoop:Ljava/lang/Runnable;
+
+    invoke-virtual {p0, v0}, Landroid/view/View;->post(Ljava/lang/Runnable;)Z
+
+    :cond_done
+    return-void
+.end method
+
+.method private endTouch()V
+    .locals 3
+
+    iget v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->kind:I
+
+    if-eqz v0, :cond_rel
+
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rHold:Ljava/lang/Runnable;
+
+    invoke-virtual {p0, v0}, Landroid/view/View;->removeCallbacks(Ljava/lang/Runnable;)Z
+
+    iget-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->penDown:Z
+
+    if-eqz v0, :cond_nh
+
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->penRelease()V
+
+    goto :cond_rel
+
+    :cond_nh
+    iget-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->inDead:Z
+
+    if-eqz v0, :cond_rel
+
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->ensureCur()V
+
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->penDown:Z
+
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->penPress()V
+
+    iget-object v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->rTap:Ljava/lang/Runnable;
+
+    const-wide/16 v1, 0x5a
+
+    invoke-virtual {p0, v0, v1, v2}, Landroid/view/View;->postDelayed(Ljava/lang/Runnable;J)Z
+
+    :cond_rel
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->release()V
+
+    return-void
+.end method
+
+.method public tick(I)V
+    .locals 3
+
+    const/4 v0, 0x1
+
+    if-eq p1, v0, :cond_hold
+
+    const/4 v0, 0x2
+
+    if-eq p1, v0, :cond_tap
+
+    const/4 v0, 0x3
+
+    if-eq p1, v0, :cond_loop
+
+    return-void
+
+    :cond_hold
+    iget v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->pid:I
+
+    const/4 v1, -0x1
+
+    if-eq v0, v1, :cond_ret
+
+    iget-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->inDead:Z
+
+    if-eqz v0, :cond_ret
+
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->ensureCur()V
+
+    const/4 v0, 0x1
+
+    iput-boolean v0, p0, Lcom/dsemu/drastic/ui/AnalogStick;->penDown:Z
+
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->penPress()V
+
+    invoke-virtual {p0}, Landroid/view/View;->invalidate()V
+
+    :cond_ret
+    return-void
+
+    :cond_tap
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->penRelease()V
+
+    return-void
+
+    :cond_loop
+    invoke-direct {p0}, Lcom/dsemu/drastic/ui/AnalogStick;->loopStep()V
+
+    return-void
 .end method

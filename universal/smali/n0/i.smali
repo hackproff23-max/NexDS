@@ -8360,3 +8360,133 @@
 
     return-void
 .end method
+
+
+.method public penCenter()I
+    .locals 6
+
+    iget v0, p0, Ln0/i;->L:F
+
+    iget v1, p0, Ln0/i;->M:F
+
+    const/4 v2, 0x0
+
+    cmpl-float v3, v0, v2
+
+    if-lez v3, :cond_zero
+
+    cmpl-float v3, v1, v2
+
+    if-lez v3, :cond_zero
+
+    iget v3, p0, Ln0/i;->n:I
+
+    const/4 v4, 0x5
+
+    if-eq v3, v4, :cond_56
+
+    const/4 v4, 0x6
+
+    if-eq v3, v4, :cond_56
+
+    const/high16 v5, 0x43000000    # 128.0f
+
+    div-float v2, v5, v0
+
+    const/high16 v5, 0x42c00000    # 96.0f
+
+    div-float v3, v5, v1
+
+    goto :cond_calc
+
+    :cond_56
+    const/high16 v5, 0x42c00000    # 96.0f
+
+    div-float v2, v5, v0
+
+    const/high16 v5, 0x43000000    # 128.0f
+
+    div-float v3, v5, v1
+
+    :cond_calc
+    float-to-int v2, v2
+
+    iget v4, p0, Ln0/i;->I:I
+
+    add-int/2addr v2, v4
+
+    float-to-int v3, v3
+
+    iget v4, p0, Ln0/i;->J:I
+
+    add-int/2addr v3, v4
+
+    shl-int/lit8 v2, v2, 0x10
+
+    const v4, 0xffff
+
+    and-int/2addr v3, v4
+
+    or-int/2addr v2, v3
+
+    return v2
+
+    :cond_zero
+    const/4 v2, 0x0
+
+    return v2
+.end method
+
+.method public penDown(II)V
+    .locals 4
+
+    invoke-virtual {p0, p1, p2}, Ln0/i;->m(II)I
+
+    move-result v0
+
+    iput v0, p0, Ln0/i;->H:I
+
+    iget v1, p0, Ln0/i;->E:I
+
+    const/high16 v2, -0x80000000
+
+    or-int/2addr v1, v2
+
+    iput v1, p0, Ln0/i;->E:I
+
+    iget-object v2, p0, Ln0/i;->a:Ln0/g;
+
+    iget v3, p0, Ln0/i;->F:I
+
+    or-int/2addr v1, v3
+
+    invoke-interface {v2, v1, v0}, Ln0/g;->d(II)V
+
+    return-void
+.end method
+
+.method public penUp()V
+    .locals 4
+
+    iget v0, p0, Ln0/i;->E:I
+
+    const v1, 0x7fffffff
+
+    and-int/2addr v0, v1
+
+    iput v0, p0, Ln0/i;->E:I
+
+    const/4 v1, 0x0
+
+    iput v1, p0, Ln0/i;->H:I
+
+    iget-object v2, p0, Ln0/i;->a:Ln0/g;
+
+    iget v3, p0, Ln0/i;->F:I
+
+    or-int/2addr v0, v3
+
+    invoke-interface {v2, v0, v1}, Ln0/g;->d(II)V
+
+    return-void
+.end method
