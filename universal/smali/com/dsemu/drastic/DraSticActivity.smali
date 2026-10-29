@@ -1323,51 +1323,8 @@
 .end method
 
 .method private U()V
-    .locals 5
+    .locals 0
 
-    sget-boolean v0, Lf0/h;->T:Z
-
-    if-eqz v0, :cond_0
-
-    const-string v0, "android.permission.RECORD_AUDIO"
-
-    invoke-static {p0, v0}, Landroidx/core/content/c;->a(Landroid/content/Context;Ljava/lang/String;)I
-
-    move-result v1
-
-    if-eqz v1, :cond_0
-
-    new-instance v1, Lcom/dsemu/drastic/DraSticActivity$t;
-
-    const/4 v2, 0x0
-
-    invoke-direct {v1, p0, v2}, Lcom/dsemu/drastic/DraSticActivity$t;-><init>(Lcom/dsemu/drastic/DraSticActivity;Lcom/dsemu/drastic/DraSticActivity$a;)V
-
-    const/4 v2, 0x1
-
-    new-array v3, v2, [Ljava/lang/String;
-
-    const/4 v4, 0x0
-
-    aput-object v0, v3, v4
-
-    iput-object v3, v1, Lcom/dsemu/drastic/DraSticActivity$t;->a:[Ljava/lang/String;
-
-    const v0, 0x7f0f00c2
-
-    invoke-virtual {p0, v0}, Landroid/content/Context;->getString(I)Ljava/lang/String;
-
-    move-result-object v0
-
-    iput-object v0, v1, Lcom/dsemu/drastic/DraSticActivity$t;->b:Ljava/lang/String;
-
-    iput v2, v1, Lcom/dsemu/drastic/DraSticActivity$t;->c:I
-
-    iget-object v0, p0, Lcom/dsemu/drastic/DraSticActivity;->h:Ljava/util/ArrayList;
-
-    invoke-virtual {v0, v1}, Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z
-
-    :cond_0
     invoke-direct {p0}, Lcom/dsemu/drastic/DraSticActivity;->V0()V
 
     return-void
@@ -3191,14 +3148,6 @@
     const/4 v1, 0x1
 
     :goto_0
-    if-eqz v1, :cond_1
-
-    new-instance v1, Lcom/dsemu/drastic/DraSticActivity$a;
-
-    invoke-direct {v1, p0, p0, v0}, Lcom/dsemu/drastic/DraSticActivity$a;-><init>(Lcom/dsemu/drastic/DraSticActivity;Lcom/dsemu/drastic/DraSticActivity;Landroid/content/Intent;)V
-
-    invoke-virtual {p0, v1}, Landroid/app/Activity;->runOnUiThread(Ljava/lang/Runnable;)V
-
     :cond_1
     sput-boolean v2, Lf0/h;->a1:Z
 

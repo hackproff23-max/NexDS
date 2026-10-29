@@ -3953,7 +3953,7 @@
     or-long/2addr v0, v2
 
     :cond_4
-    sget-boolean v2, Lf0/h;->T:Z
+    const/4 v2, 0x0
 
     if-eqz v2, :cond_5
 
