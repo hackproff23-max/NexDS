@@ -6495,6 +6495,8 @@
 
     invoke-virtual {v0, v1}, Landroid/app/Activity;->setContentView(Landroid/view/View;)V
 
+    invoke-static {v0}, Lcom/dsemu/drastic/ui/AnalogStick;->attachEdit(Landroid/app/Activity;)V
+
     sget v1, Landroid/os/Build$VERSION;->SDK_INT:I
 
     const/16 v2, 0x13

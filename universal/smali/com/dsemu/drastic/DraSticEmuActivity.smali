@@ -1287,6 +1287,8 @@
 
     iput-object v4, p0, Lcom/dsemu/drastic/DraSticEmuActivity;->e:Lcom/dsemu/drastic/DraSticGlView;
 
+    invoke-static {p0, v4}, Lcom/dsemu/drastic/ui/AnalogStick;->attachGame(Landroid/app/Activity;Lcom/dsemu/drastic/DraSticGlView;)V
+
     iget-boolean v6, p0, Lcom/dsemu/drastic/DraSticEmuActivity;->w:Z
 
     invoke-virtual {v4, p0, v6}, Lcom/dsemu/drastic/DraSticGlView;->z0(Lcom/dsemu/drastic/DraSticEmuActivity;Z)V
