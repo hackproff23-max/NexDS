@@ -628,6 +628,20 @@
     return-void
 
     :cond_3
+    if-nez p2, :cond_add
+
+    return-void
+
+    :cond_add
+    invoke-static {p2}, Lcom/dsemu/drastic/filesystem/d;->d(Lcom/dsemu/drastic/filesystem/b;)Z
+
+    move-result v0
+
+    if-nez v0, :cond_done
+
+    invoke-static {p0, p2}, Lcom/dsemu/drastic/filesystem/d;->c(Landroid/content/Context;Lcom/dsemu/drastic/filesystem/b;)V
+
+    :cond_done
     return-void
 .end method
 
